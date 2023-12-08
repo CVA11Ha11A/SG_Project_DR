@@ -46,7 +46,8 @@ public static class StructureHelper
 
     // 주어진 경계 포인트 범위 내에서 하단 왼쪽 모퉁이를 생성하는 메서드
     public static Vector2Int GenerateBottomLeftCornerBetWeen(
-        Vector2Int boundaryLeftPoint, Vector2Int boundaryRightPoint, float pointModifier, int offset)
+        Vector2Int boundaryLeftPoint, Vector2Int boundaryRightPoint, float pointModifier, int offset,
+        int roomWidthMax, int roomLengthMax)
     {
         int minX = boundaryLeftPoint.x + offset;
         int maxX = boundaryRightPoint.x - offset;
@@ -54,14 +55,19 @@ public static class StructureHelper
         int maxY = boundaryRightPoint.y - offset;
 
         // 랜덤한 좌표를 생성하여 반환합니다.
+        //return new Vector2Int(
+        //    Random.Range(minX, (int)(minX + ((maxX - minX) * pointModifier))),
+        //    Random.Range(minY, (int)(minY + ((minY - minY) * pointModifier))));
         return new Vector2Int(
-            Random.Range(minX, (int)(minX + (maxX - minX) * pointModifier)),
-            Random.Range(minY, (int)(minY + (minY - minY) * pointModifier)));
+            Random.Range(minX, (int)(minX + ((maxX - minX) * pointModifier))),
+            Random.Range(minY, (int)(minY + ((minY - minY) * pointModifier))));
+
     }       // GenerateBottomLeftCornerBetWeen()
 
     // 주어진 경계 포인트 범위 내에서 상단 오른쪽 모퉁이를 생성하는 메서드
     public static Vector2Int GenerateTopRightCornerBetWeen(
-        Vector2Int boundaryLeftPoint, Vector2Int boundaryRightPoint, float pointModifier, int offset)
+        Vector2Int boundaryLeftPoint, Vector2Int boundaryRightPoint, float pointModifier, int offset,
+        int roomWidthMax, int roomLengthMax)
     {
         int minX = boundaryLeftPoint.x + offset;
         int maxX = boundaryRightPoint.x - offset;
@@ -69,6 +75,33 @@ public static class StructureHelper
         int maxY = boundaryRightPoint.y - offset;
 
         // 랜덤한 좌표를 생성하여 반환합니다.
+        //return new Vector2Int(
+        //    Random.Range((int)(minX + (maxX - minX) * pointModifier), maxX),
+        //    Random.Range((int)(minY + (maxY - minY) * pointModifier), maxY));
+
+        return new Vector2Int(
+            Random.Range((int)(minX + (maxX - minX) * pointModifier), maxX),
+            Random.Range((int)(minY + (maxY - minY) * pointModifier), maxY));
+    }       // GenerateTopRightCornerBetWeen()
+
+    // 위에서 생성된 좌측하단 모서리 기준으로 생성하는 우측 상단 모서리
+    public static Vector2Int GenerateTopRightCornerBetWeenFix(
+        Vector2Int leftBottomCorner,Vector2Int boundaryLeftPoint, Vector2Int boundaryRightPoint, float pointModifier, int offset,
+        int roomWidthMax, int roomLengthMax,int roomWidthMin,int roomLengthMin)
+    {
+        // boundary = 주어진 공간
+        int minX = boundaryLeftPoint.x + offset;
+        int maxX = boundaryRightPoint.x - offset;
+        int minY = boundaryLeftPoint.y + offset;
+        int maxY = boundaryRightPoint.y - offset;
+
+        // 랜덤한 좌표를 생성하여 반환합니다.
+        //return new Vector2Int(
+        //    Random.Range((int)(minX + (maxX - minX) * pointModifier), maxX),
+        //    Random.Range((int)(minY + (maxY - minY) * pointModifier), maxY));
+        
+        //Vector2Int randV2Int = new Vector2Int(Random.Range(leftBottomCorner.x + roomLengthMin),Random.Range())
+
         return new Vector2Int(
             Random.Range((int)(minX + (maxX - minX) * pointModifier), maxX),
             Random.Range((int)(minY + (maxY - minY) * pointModifier), maxY));

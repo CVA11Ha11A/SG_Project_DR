@@ -43,8 +43,8 @@ public class GameManager : MonoBehaviour
         }
     }
     private static GameManager m_instance; // 싱글톤이 할당될 static 변수    
-    
-    
+
+
     [Header("Player Object")]
     public GameObject player;
     private ScreenFader fader;
@@ -58,11 +58,11 @@ public class GameManager : MonoBehaviour
     private string _playerID; // SetPlayerID(string id) 메서드로 설정함
     public string PlayerID => _playerID;
 
-    
+
     [Header("Dungeon")]
     // ----------------------------------------------- SG ------------------------------------------------
-    
-    
+
+
     public int nowFloor = 1;        // 현재 몇층인지 알려줄 변수
 
     public static List<bool> isClearRoomList;       // 모든 방의 클리어 여부를 관리해줄 List
@@ -72,9 +72,9 @@ public class GameManager : MonoBehaviour
     public bool IsClear
     {
         get { return isClear; }
-        set 
+        set
         {
-            if(isClear != value)
+            if (isClear != value)
             {
                 isClear = value;
                 DoorControll(IsClear);
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     }
 
     public event System.Action DoorOnEvent;
-    public event System.Action DoorOffEvent;
+    public event System.Action DoorOffEvent;                
 
 
 
@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
         // 싱글톤 인스턴스 초기화
         if (m_instance == null)
         {
+
             m_instance = this;
             DontDestroyOnLoad(gameObject);
         }

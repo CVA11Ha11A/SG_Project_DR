@@ -19,23 +19,27 @@ public class DungeonGenerator
 
     // 방 및 복도 생성 및 던전 구조 계산
     public List<Node> CalculateRooms(int maxIterations, int roomWidthMin, int roomLengthMin,
-        float roomBottomCornerModifier, float roomTopCornerModifier, int roomOffset, int corridorWidth)
+        float roomBottomCornerModifier, float roomTopCornerModifier, int roomOffset, int corridorWidth,
+        int roomWidthMax,int roomLengthMax)
     {
         // 이진 공간 분할을 위한 클래스 초기화
         BinarySpacePartitioner bsp = new BinarySpacePartitioner(dungeonWidth, dungeonLength);
 
         // 모든 공간 노드를 미리 준비
-        allSpaceNodes = bsp.PrepareNodesCollection(maxIterations, roomWidthMin, roomLengthMin);
+        // 참조
+        allSpaceNodes = bsp.PrepareNodesCollection(maxIterations, roomWidthMin, roomLengthMin, roomWidthMax,roomLengthMax);
 
         // 그래프를 탐색하여 가장 하위 단말 노드를 추출하여 방 공간 목록 생성
         List<Node> roomSpaces = StructureHelper.TraverseGraphToExtractLowestLeafes(bsp.RootNode);
 
         // 방 생성을 위한 클래스 초기화
+        // 참조
         RoomGenerator roomGenerator = new RoomGenerator(maxIterations, roomLengthMin, roomWidthMin);
 
         // 주어진 공간에 방 생성
         List<RoomNode> roomList = roomGenerator.GenerateRoomsInGivenSpaces(
-            roomSpaces, roomBottomCornerModifier, roomTopCornerModifier, roomOffset);
+            roomSpaces, roomBottomCornerModifier, roomTopCornerModifier, roomOffset, roomWidthMax, roomLengthMax,
+            roomWidthMin,roomLengthMin);
 
         // 복도 생성을 위한 클래스 초기화
         CorridorsGenerator corridorGenerator = new CorridorsGenerator();

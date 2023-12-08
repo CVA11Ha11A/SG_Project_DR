@@ -17,7 +17,8 @@ public class BinarySpacePartitioner
         // 이진 공간 분할을 초기화하고 루트 노드를 생성
     }
 
-    public List<RoomNode> PrepareNodesCollection(int maxIterations, int roomWidthMin, int roomLengthMin)
+    public List<RoomNode> PrepareNodesCollection(int maxIterations, int roomWidthMin, int roomLengthMin,
+        int roomWidthMax,int roomLengthMax)
     {
         // 이진 공간 분할을 수행하고 노드 컬렉션을 준비하는 함수
         Queue<RoomNode> graph = new Queue<RoomNode>();
@@ -29,7 +30,8 @@ public class BinarySpacePartitioner
         {
             iterations++;
             RoomNode currentNode = graph.Dequeue();
-            if (currentNode.Width >= roomWidthMin * 2 || currentNode.Length >= roomLengthMin * 2)
+            if (currentNode.Width >= roomWidthMin * 2 || currentNode.Length >= roomLengthMin * 2 &&
+                currentNode.Width < roomWidthMax && currentNode.Length < roomLengthMax)
             {
                 SplitTheSpace(currentNode, listToReturn, roomLengthMin, roomWidthMin, graph);
                 // 현재 노드를 분할하고 자식 노드를 생성하여 큐에 추가
@@ -38,7 +40,8 @@ public class BinarySpacePartitioner
         return listToReturn;
     }
 
-    private void SplitTheSpace(RoomNode currentNode, List<RoomNode> listToReturn, int roomLengthMin, int roomWidthMin, Queue<RoomNode> graph)
+    private void SplitTheSpace(RoomNode currentNode, List<RoomNode> listToReturn, int roomLengthMin, int roomWidthMin,
+        Queue<RoomNode> graph)
     {
         // 공간을 분할하는 함수
         Line line = GetLineDividingSpace(
@@ -111,7 +114,8 @@ public class BinarySpacePartitioner
         // 공간을 나눌 방향과 좌표를 결정하여 반환
     }
 
-    private Vector2Int GetCoordinatesFororientation(Orientation orientation, Vector2Int bottomLeftAreaCorner, Vector2Int topRightAreaCorner, int roomWidthMin, int roomLengthMin)
+    private Vector2Int GetCoordinatesFororientation(Orientation orientation, Vector2Int bottomLeftAreaCorner, Vector2Int topRightAreaCorner,
+        int roomWidthMin, int roomLengthMin)
     {
         // 분할된 방향에 따라 새로운 좌표를 생성하는 함수
         Vector2Int coordinates = Vector2Int.zero;

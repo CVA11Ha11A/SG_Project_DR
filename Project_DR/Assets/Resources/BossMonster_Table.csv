@@ -1,2 +1,6 @@
-ID,Name,Stage,HP,MaxHP,Atk,Def,GiveEXP,GiveGold,AreaSpeed,AreaRange,AreaSpawnTime,AreaDamage,OutputInterval
-100001,눈,1,1.0,1.0,1.0,1.0,1.0,1,1.0,1.0,1.0,1.0,2.0
+ID,Name,Stage,PrefabName,HP,MaxHP,Atk,Def,GiveEXP,GiveGold,AttackPatternKeyID
+100001,눈,1,Prefab,1.0,1.0,1.0,1.0,1.0,1,110001
+100002,드라,2,Prefab,1.0,1.0,1.0,1.0,1.0,1,110002
+100003,보헌 블레허,3,Prefab,1.0,1.0,1.0,1.0,1.0,1,110003
+100004,리퍼,4,Prefab,1.0,1.0,1.0,1.0,1.0,1,110004
+100005,드뷔시,5,Prefab,1.0,1.0,1.0,1.0,1.0,1,110005
