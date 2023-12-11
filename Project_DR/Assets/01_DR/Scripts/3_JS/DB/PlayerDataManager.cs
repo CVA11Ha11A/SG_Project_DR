@@ -38,10 +38,6 @@ public static class PlayerDataManager
      *                 Private Fields
      *************************************************/
     #region [+]
-    [Header("RDS")]
-    private static string _url =
-        "https://80koj3uzn4.execute-api.ap-northeast-2.amazonaws.com/default/UserTableLambda";
-
     [Header("Player")]
     private static string _id = "";           // 플레이어의 ID
     private static float _hp;                 // 플레이어의 체력
@@ -215,8 +211,9 @@ public static class PlayerDataManager
         // 폼 생성
         WWWForm form = MakeForm("search_all", PlayerID);
 
+        string url = SecureURLHandler.GetURL();
         // using문을 사용하여 메모리 누수를 해결
-        using (UnityWebRequest www = UnityWebRequest.Post(_url, form))
+        using (UnityWebRequest www = UnityWebRequest.Post(url, form))
         {
             yield return www.SendWebRequest();
 
@@ -260,8 +257,9 @@ public static class PlayerDataManager
         // 폼 생성
         WWWForm form = MakeForm("add", PlayerID, column, value);
 
+        string url = SecureURLHandler.GetURL();
         // using문을 사용하여 메모리 누수를 해결
-        using (UnityWebRequest www = UnityWebRequest.Post(_url, form))
+        using (UnityWebRequest www = UnityWebRequest.Post(url, form))
         {
             yield return www.SendWebRequest();
 

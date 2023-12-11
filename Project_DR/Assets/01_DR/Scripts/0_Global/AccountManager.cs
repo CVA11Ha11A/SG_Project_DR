@@ -16,7 +16,6 @@ public class AccountManager : MonoBehaviour
     [SerializeField] InputField infoInput;
     [SerializeField] TMP_Text description;
 
-    [SerializeField] string url;
     [SerializeField] string sceneName;
 
     public void LoginClick() => StartCoroutine(AccountCo("login"));
@@ -58,16 +57,7 @@ public class AccountManager : MonoBehaviour
         form.AddField("password", passwordInput.text);
         form.AddField("mbti", infoInput.text);
 
-        Debug.Log(url);
-
-        TextAsset txt = Resources.Load("231211") as TextAsset;
-        string[] key = txt.text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-        Debug.Log(key[0] + ", " + key[1]);
-        url = Crypto.DecryptAESByBase64Key(url, key[0], key[1]);
-
-
-        Debug.Log(url);
-
+        string url = SecureURLHandler.GetURL();
 
         // using문을 사용하여 메모리 누수 해결
         // 사용이 끝난 후 할당 해제
@@ -100,16 +90,6 @@ public class AccountManager : MonoBehaviour
             // 추가로 Dipose()함수를 호출해서 할당 해제
             www.Dispose();
         }
-    }
-
-    public string DecryptURL(string url)
-    {
-        TextAsset txt = Resources.Load("231211") as TextAsset; 
-        string[] key = txt.text.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-        Debug.Log(key[0] + ", " + key[1]);
-        url = Crypto.DecryptAESByBase64Key(url, key[0], key[1]);
-
-        return url;
     }
 
     //IEnumerator AccountCo(string command)
