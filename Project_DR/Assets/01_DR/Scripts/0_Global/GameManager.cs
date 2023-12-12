@@ -232,4 +232,14 @@ public class GameManager : MonoBehaviour
     {
         _playerID = id;
     }
+
+    /// <summary>
+    /// 던전 재생성 해주는 함수
+    /// </summary>
+    public void ReCreateDungeon()
+    {
+        DungeonCreator dungeonCreator = GameObject.Find("DungeonCreator").GetComponent<DungeonCreator>();
+        dungeonCreator.CreateDungeon();
+    }       // ReCreateDungeon()
+
 }       // ClassEnd

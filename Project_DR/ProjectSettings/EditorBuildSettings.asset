@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/01_DR/Scenes/JH/JH_LobbyScene.unity
     guid: 26a6ab265365bef43b182095d010b05c
-  - enabled: 0
+  - enabled: 1
     path: Assets/01_DR/Scenes/SG/SG_TestScene.unity
     guid: ad1af0f9f4c94264e97d5dfd7e14cc40
   - enabled: 0
@@ -50,7 +50,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/01_DR/Scenes/JS/JS_MainScene2.unity
     guid: 14844720c79c1274abd453a7ce033da6
-  - enabled: 0
+  - enabled: 1
     path: Assets/01_DR/Scenes/SG/SG_DataLodingScene.unity
     guid: d42d3cf52463a7a42a3395d483b96215
   - enabled: 0

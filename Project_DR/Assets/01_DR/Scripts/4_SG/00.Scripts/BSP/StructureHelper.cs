@@ -86,8 +86,8 @@ public static class StructureHelper
 
     // 위에서 생성된 좌측하단 모서리 기준으로 생성하는 우측 상단 모서리
     public static Vector2Int GenerateTopRightCornerBetWeenFix(
-        Vector2Int leftBottomCorner,Vector2Int boundaryLeftPoint, Vector2Int boundaryRightPoint, float pointModifier, int offset,
-        int roomWidthMax, int roomLengthMax,int roomWidthMin,int roomLengthMin)
+        Vector2Int leftBottomCorner, Vector2Int boundaryLeftPoint, Vector2Int boundaryRightPoint, float pointModifier, int offset,
+        int roomWidthMax, int roomLengthMax, int roomWidthMin, int roomLengthMin)
     {
         // boundary = 주어진 공간
         int minX = boundaryLeftPoint.x + offset;
@@ -99,12 +99,32 @@ public static class StructureHelper
         //return new Vector2Int(
         //    Random.Range((int)(minX + (maxX - minX) * pointModifier), maxX),
         //    Random.Range((int)(minY + (maxY - minY) * pointModifier), maxY));
-        
-        //Vector2Int randV2Int = new Vector2Int(Random.Range(leftBottomCorner.x + roomLengthMin),Random.Range())
 
-        return new Vector2Int(
-            Random.Range((int)(minX + (maxX - minX) * pointModifier), maxX),
-            Random.Range((int)(minY + (maxY - minY) * pointModifier), maxY));
+        Vector2Int randV2Int = new Vector2Int(Random.Range(minX + roomLengthMin, maxX - 1),
+            Random.Range(minY + roomWidthMin, maxY -1));
+        //Debug.Log($"maxX : {maxX}\nmaxY : {maxY}\nrandX : {randV2Int.x}\nrandY : {randV2Int.y}");
+        if (maxX < (int)randV2Int.x || maxY < (int)randV2Int.y)
+        {
+
+           // Debug.Log($"원본계산식 반환");
+            return new Vector2Int(
+                Random.Range((int)(minX + (maxX - minX) * pointModifier), maxX),
+                Random.Range((int)(minY + (maxY - minY) * pointModifier), maxY));
+        }        
+        else if(leftBottomCorner.x * 2 <randV2Int.x || leftBottomCorner.y * 2 < randV2Int.y ||
+                leftBottomCorner.x * 3 < randV2Int.y)
+        {
+            //Debug.Log($"최소한의 방으로 리턴");
+            Vector2Int minVector = new Vector2Int(leftBottomCorner.x + roomLengthMin, leftBottomCorner.y + roomWidthMin);
+            return minVector;
+        }
+        else 
+        {
+            //Debug.Log("커스텀 좌표 반환");
+            
+            return randV2Int;
+        }
+
     }       // GenerateTopRightCornerBetWeen()
 
     // 두 벡터의 중간 지점을 계산하는 메서드

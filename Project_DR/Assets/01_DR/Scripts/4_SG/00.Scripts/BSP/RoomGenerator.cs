@@ -31,14 +31,14 @@ public class RoomGenerator
                 roomWidthMax, roomLengthMax);
 
             //// 주어진 공간 내에서 새로운 바닥 오른쪽 모서리 지점을 생성합니다. -> 우측상단 
-            //Vector2Int newTopRightPoint = StructureHelper.GenerateTopRightCornerBetWeen(
-            //    space.BottomLeftAreaCorner, space.TopRightAreaCorner, roomTopCornerModifier, roomOffset,
-            //    roomWidthMax, roomLengthMax);
+            Vector2Int newTopRightPoint = StructureHelper.GenerateTopRightCornerBetWeen(
+                space.BottomLeftAreaCorner, space.TopRightAreaCorner, roomTopCornerModifier, roomOffset,
+                roomWidthMax, roomLengthMax);
 
-            // Fix 윗 함수 수정하여서 긴 맵이 깔리지 못하도록 제한을 둘것임
-            Vector2Int newTopRightPoint = StructureHelper.GenerateTopRightCornerBetWeenFix(
-                newBottomLeftPoint,space.BottomLeftAreaCorner, space.TopRightAreaCorner, roomTopCornerModifier, roomOffset,
-                roomWidthMax, roomLengthMax,roomWidthMin,roomLengthMin);
+            // Fix 윗 함수 수정하여서 긴 맵이 깔리지 못하도록 제한을 둘것임 // 12.11 NPC이후 수정 해야할거같음
+            //Vector2Int newTopRightPoint = StructureHelper.GenerateTopRightCornerBetWeenFix(
+            //    newBottomLeftPoint,space.BottomLeftAreaCorner, space.TopRightAreaCorner, roomTopCornerModifier, roomOffset,
+            //    roomWidthMax, roomLengthMax,roomWidthMin,roomLengthMin);
 
             // 공간의 모서리 지점을 업데이트합니다.
             space.BottomLeftAreaCorner = newBottomLeftPoint;

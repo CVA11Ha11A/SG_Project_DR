@@ -99,6 +99,12 @@ public class CorridorNode : Node
 
         while (y == -1 && sortedLeftStructure.Count > 0)
         {
+            if(sortedLeftStructure.Count == 0)
+            {
+                GameManager.instance.ReCreateDungeon();
+                return;
+            }
+
             // 유효한 Y 좌표가 없다면 왼쪽 방 중 다른 후보를 선택하여 재시도합니다.
             sortedLeftStructure = sortedLeftStructure.Where(
                 child => child.TopLeftAreaCorner.y != leftStructure.TopLeftAreaCorner.y).ToList();
